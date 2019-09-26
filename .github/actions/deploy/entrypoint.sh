@@ -42,7 +42,7 @@ REPOSITORY_PATH="https://${ACCESS_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" &&
 
 git checkout "${BASE_BRANCH:-master}"
 
-echo "-----------------------Running build scripts... ---------------" 
+echo "----------------Running build scripts ---------------" 
 
 eval "$BUILD_SCRIPT" && \
 
@@ -57,9 +57,13 @@ then
   git pull origin "${DEPLOY_BRANCH:-gh-pages}"
 fi
 
+echo "---------remove node_modules && other useless files------"
 shopt -s extglob
 
 rm -rf !($FOLDER) && cp -r  $FOLDER/.  ./ && rm -r $FOLDER && \
+
+
+echo "---------generate commit && push------"
 
 if [ -z "$(git status --porcelain)" ]; then
   echo "Nothing to deploy"
