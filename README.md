@@ -7,3 +7,5 @@ This Action will run `yarn && yarn build`
 Then push `build` folder as a new commit on `gh-pages` branch
 
 > note: mark sure `build` folder is on your gitignore list
+
+deploy page: [demo](https://jeoy.github.io/github-deploy-actions/)
