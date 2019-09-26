@@ -3,9 +3,9 @@
 
 set -e
 
-if [ -z "$SECRET_TOKEN" ]
+if [ -z "$ACCESS_TOKEN" ]
 then
-  echo "SECRET_TOKEN is required"
+  echo "ACCESS_TOKEN is required"
   exit 1
 fi
 
@@ -31,21 +31,18 @@ then
   COMMIT_NAME="${GITHUB_ACTOR}"
 fi
 
-# Directs the action to the the Github workspace.
 cd $GITHUB_WORKSPACE && \
 
-# Configures Git.
 git init && \
 git config --global user.email "${COMMIT_EMAIL}" && \
 git config --global user.name "${COMMIT_NAME}" && \
 
 
-## Initializes the repository path using the access token.
-REPOSITORY_PATH="https://${SECRET_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" && \
+REPOSITORY_PATH="https://${ACCESS_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" && \
 
+git checkout "${BASE_BRANCH:-master}"
 
-# Builds the project if a build script is provided.
-echo "-----------------------Running build scripts... ---------------" 
+echo "----------------Running build scripts ---------------" 
 
 eval "$BUILD_SCRIPT" && \
 
@@ -60,9 +57,13 @@ then
   git pull origin "${DEPLOY_BRANCH:-gh-pages}"
 fi
 
+echo "---------remove node_modules && other useless files------"
 shopt -s extglob
 
 rm -rf !($FOLDER) && cp -r  $FOLDER/.  ./ && rm -r $FOLDER && \
+
+
+echo "---------generate commit && push------"
 
 if [ -z "$(git status --porcelain)" ]; then
   echo "Nothing to deploy"
