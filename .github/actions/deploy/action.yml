@@ -1,0 +1,10 @@
+name: 'auto deploy action'
+description:
+    'This action will auto deploy to target branch when it get triggered'
+author: 'jeoy <jeoy_z@126.com>'
+runs:
+    using: 'docker'
+    image: 'Dockerfile'
+branding:
+    icon: 'package'
+    color: 'green'
