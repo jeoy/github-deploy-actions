@@ -31,20 +31,17 @@ then
   COMMIT_NAME="${GITHUB_ACTOR}"
 fi
 
-# Directs the action to the the Github workspace.
 cd $GITHUB_WORKSPACE && \
 
-# Configures Git.
 git init && \
 git config --global user.email "${COMMIT_EMAIL}" && \
 git config --global user.name "${COMMIT_NAME}" && \
 
 
-## Initializes the repository path using the access token.
 REPOSITORY_PATH="https://${ACCESS_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" && \
 
+git checkout "${BASE_BRANCH:-master}"
 
-# Builds the project if a build script is provided.
 echo "-----------------------Running build scripts... ---------------" 
 
 eval "$BUILD_SCRIPT" && \
