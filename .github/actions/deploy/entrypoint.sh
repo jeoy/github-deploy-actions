@@ -3,9 +3,9 @@
 
 set -e
 
-if [ -z "$SECRET_TOKEN" ]
+if [ -z "$ACCESS_TOKEN" ]
 then
-  echo "SECRET_TOKEN is required"
+  echo "ACCESS_TOKEN is required"
   exit 1
 fi
 
@@ -41,7 +41,7 @@ git config --global user.name "${COMMIT_NAME}" && \
 
 
 ## Initializes the repository path using the access token.
-REPOSITORY_PATH="https://${SECRET_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" && \
+REPOSITORY_PATH="https://${ACCESS_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" && \
 
 
 # Builds the project if a build script is provided.
