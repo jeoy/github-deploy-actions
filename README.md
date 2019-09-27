@@ -1,6 +1,12 @@
 # Github-deploy-actions
 
-This action will auto deploy to target branch when it get triggered
+This action will auto build and deploy to target branch when it get triggered.
+
+Also it can preserve the history of gh-pages and convenient for rolling back to
+previous version.
+
+And it will compare deployment file to previous version by using
+`git status --porcelain`, it will not to deploy if nothing change.
 
 # How to Use
 
@@ -55,9 +61,9 @@ Then push `build` folder as a new commit on `gh-pages` branch
 
 # deploy page:
 
-[demo](https://jeoy.github.io/github-deploy-actions/)
+[gh-pages demo](https://jeoy.github.io/github-deploy-actions/)
 
 ## what exactly is done during the action
 
 checkout this
-[shell](https://github.com/jeoy/github-deploy-actions/blob/develop/.github/actions/deploy/entrypoint.sh)
+[entrypoint.sh](https://github.com/jeoy/github-deploy-actions/blob/master/entrypoint.sh)
