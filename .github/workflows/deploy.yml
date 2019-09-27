@@ -13,7 +13,7 @@ jobs:
               uses: actions/checkout@master
 
             - name: Build and Deploy
-              uses: ./.github/actions/deploy
+              uses: jeoy/github-deploy-actions@master
               env:
                   COMMIT_EMAIL: jeoy_z@126.com
                   COMMIT_NAME: jeoy
